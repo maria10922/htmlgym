@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Registro</title>
+  <style>
+    /* General Body Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #0e0e0e;
+      margin: 0;
+      padding: 0;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #000000;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 97%;
+      z-index: 100;
+    }
+
+    header nav a {
+      color: #ffffff;
+      margin-left: 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* Main Content Wrapper */
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 80px; /* Espacio para el header */
+    }
+
+    /* Formulario */
+    #registro {
+      padding: 20px;
+      background-color: #444;
+      border-radius: 8px;
+      width: 300px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      text-align: center;
+    }
+
+    #registro h2 {
+      margin-bottom: 20px;
+    }
+
+    #registro input,
+    #registro select {
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    #registro button,
+    #registro input[type="submit"] {
+      padding: 10px 20px;
+      background-color: #808080;
+      color: #111;
+      font-weight: bold;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+
+    #registro button:hover,
+    #registro input[type="submit"]:hover {
+      background-color: #666;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #000000;
+      color: #aaaaaa;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h2>MUSCLEGYM</h2>
+    <nav>
+      <a href="/pages/inicio/dashboard.html">Inicio</a>
+      <a href="/pages/acerca_de/acerca.html">Acerca de</a>
+      <a href="/pages/programas/programas.html">Programas</a>
+      <a href="/pages/tienda/tienda.html">Tienda</a>
+      <a href="/pages/membrecia/membresia.html">Membresía</a>
+      <a href="/pages/perfil/perfil.html">Perfil</a>
+      <a href="/pages/inicio/acceso.html">Acceso</a>
+      <a href="/pages/tienda/carrito.html" id="carritoMenu">
+        🛒 <span id="contadorCarrito" class="contador">0</span>
+      </a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <section id="registro">
+      <h2>Regístrate en el programa</h2>
+      <form action="registro_programa.php" method="POST">
+        <label for="nombre_usuario">Nombre de usuario:</label>
+        <input type="text" id="nombre_usuario" name="nombre_usuario" required><br><br>
+        <label for="programa">Selecciona el programa:</label>
+        <select name="programa" id="programa" required>
+          <option value="Ayuda para principiantes">Ayuda para principiantes</option>
+          <option value="Entrenamiento avanzado">Entrenamiento avanzado</option>
+          <option value="Perdida de peso">Perdida de peso</option>
+          <option value="Sin equipo">Sin equipo</option>
+          <option value="Entrenamiento de fuerza">Entrenamiento de fuerza</option>
+        </select><br><br>
+        
+        <input type="submit" value="Registrar">
+      </form>
+      <button onclick="ocultarFormulario()">Cancelar</button>
+    </section>
+  </main>
+
+
+  <footer>
+    <p>© 2024 MUSCLEGYM. Todos los derechos reservados.</p>
+  </footer>
+  <script>
+    // Función para obtener el valor del parámetro de la URL
+    function obtenerParametroUrl(parametro) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(parametro);
+    }
+
+    // Establecer el valor seleccionado en el formulario
+    window.onload = function() {
+      const programaSeleccionado = obtenerParametroUrl('programa');
+      if (programaSeleccionado) {
+        document.getElementById('programa').value = programaSeleccionado;
+      }
+    };
+
+    // Ocultar el formulario
+    function ocultarFormulario() {
+      document.getElementById('registro').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>

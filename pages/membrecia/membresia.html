@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Membresías Disponibles</title>
+  <style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #00010E;
+margin: 0;
+  padding: 0;
+  color: white;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0);
+  position: relative;
+    z-index: 2; 
+    border-bottom: 0.1px solid #ffffff5e;
+}
+
+header nav a {
+  color: #ffffff;
+  margin-left: 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+h1 {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 40px;
+  color: #a8a8a8; /* Verde claro */
+}
+
+.planes .tarjetas {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.tarjeta {
+  background-color: #33333300;
+  border-radius: 8px;
+  padding: 20px;
+  width: 30%;
+  box-shadow: 0 4px 8px rgba(194, 194, 194, 0.2);
+  text-align: center;
+  transition: transform 0.3s;
+  margin-bottom: 60px;
+}
+
+.tarjeta h3 {
+  font-size: 24px;
+  color: #888888;
+  margin-bottom: 15px;
+}
+
+.tarjeta p {
+  font-size: 16px;
+  color: #c2c2c2;
+  margin-bottom: 10px;
+}
+
+.tarjeta ul {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.tarjeta ul li {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.sin-costo {
+  font-size: 14px;
+  color: #888888;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+button {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #00043d;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #0f1041, #010036);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #0f1041, #010036); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+/* Color de fondo del botón */
+  color: #ffffff; /* Color del texto del botón */
+  font-weight: bold;
+  border-radius: 5px;
+  text-decoration: none;
+  position: relative; /* Necesario para que el texto esté por encima del pseudo-elemento */
+  z-index: 2;
+}
+
+button:hover {
+  background-color: -webkit-linear-gradient(to right, #0f1041, #010036);  /* Chrome 10-25, Safari 5.1-6 */
+background-color: linear-gradient(to right, #0f1041, #010036);
+}
+
+.tarjeta:hover {
+  transform: translateY(-10px);
+}
+
+
+.premium {
+  background-color: #00000000;
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: rgba(0, 0, 0, 0); 
+  border-top: 0.1px solid #ffffff5e;
+}
+
+footer p {
+  font-size: 0.9em;
+  color: #ffffff; /* Color del texto del footer */
+}
+.contador {
+  top: -10px;
+  right: -10px;
+  background-color: rgba(255, 0, 0, 0.7); /* Fondo del contador */
+  color: white;
+  border-radius: 50%;
+  padding: 5px 5px;
+  font-size: 14px;
+}
+.planes{
+  padding: 0;
+  margin: 30px;
+}
+  </style>
+</head>
+<body>
+  <!-- Header de navegación -->
+  <header>
+    <h2>MUSCLEGYM</h2>
+    <nav>
+      <a href="/htmlgym/pages/inicio/dashboard.html">Inicio</a>
+      <a href="/htmlgym/pages/acerca_de/acerca.html">Acerca de</a>
+      <a href="/htmlgym/pages/programas/programas.php">Programas</a>
+      <a href="/htmlgym/pages/tienda/tienda.html">Tienda</a>
+      <a href="/htmlgym/pages/membrecia/membresia.html">Membresía</a>
+      <a href="/htmlgym/pages/perfil/perfil1.php">Perfil</a>
+      <a href="/htmlgym/pages/inicio/acceso.html">Acceso</a>
+    <a class="carrito-icono">
+      <a href="/htmlgym/pages/tienda/carrito.html" id="carritoMenu">
+        🛒 
+        <span id="contadorCarrito" class="contador">0</span>
+      </a>
+    </a>
+    <a href="/htmlgym/pages/entrenador/index.php">Chat con entrenador</a>
+    <a href="/htmlgym/pages/entrenador/chat.php">Entrenador</a>
+  </nav>   
+  </header>
+  <title>Planes de Membresía</title>
+  <section class="planes">
+    <h1>Membrecías</h1>
+    <div class="tarjetas">
+      <div class="tarjeta">
+        <h3>BÁSICO</h3>
+        <p>Plan de un mes</p>
+        <ul>
+          <li>Número de gimnasios: 13 gimnasios</li>
+          <li>Check-in: 20 visitas al mes</li>
+          <li>Precio: $39,000/mes</li>
+        </ul>
+        <p class="sin-costo">SIN COSTES DE INSCRIPCIÓN: NO PAGAS NADA A LOS GIMNASIOS</p>
+        <button onclick="window.location.href='registro.html?plan=basico'">Comienza hoy</button>
+      </div>
+      <div class="tarjeta avanzado">
+        <h3>AVANZADO</h3>
+        <p>Plan de tres meses</p>
+        <ul>
+          <li>Número de gimnasios: 13 gimnasios</li>
+          <li>Check-in: 20 visitas al mes</li>
+          <li>Precio: $39,000/mes</li>
+        </ul>
+        <p class="sin-costo">SIN COSTES DE INSCRIPCIÓN: NO PAGAS NADA A LOS GIMNASIOS</p>
+        <button onclick="window.location.href='registro.html?plan=avanzado'">Comienza hoy</button>
+      </div>
+      <div class="tarjeta premium">
+        <h3>PREMIUM</h3>
+        <p>Plan de seis meses</p>
+        <ul>
+          <li>Número de gimnasios: 13 gimnasios</li>
+          <li>Check-in: 20 visitas al mes</li>
+          <li>Precio: $39,000/mes</li>
+        </ul>
+        <p class="sin-costo">SIN COSTES DE INSCRIPCIÓN: NO PAGAS NADA A LOS GIMNASIOS</p>
+        <button onclick="window.location.href='registro.html?plan=premium'">Comienza hoy</button>
+      </div>
+    </div>
+  </section>
+  <script>
+    // Actualizar el contador del carrito
+    function actualizarContadorCarrito() {
+      const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      document.getElementById('contadorCarrito').textContent = carrito.reduce(
+        (total, item) => total + item.cantidad,
+        0
+      );
+    }
+            // Cargar carrito desde localStorage al cargar la página
+            document.addEventListener('DOMContentLoaded', () => {
+        actualizarContadorCarrito();
+          })
+    </script>
+  <!-- Footer -->
+  <footer>
+    <p>© 2024 Gym Plataforma. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>

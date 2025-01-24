@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fitness Landing Page</title>
+  <script>
+  // Actualizar el contador del carrito
+  function actualizarContadorCarrito() {
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    document.getElementById('contadorCarrito').textContent = carrito.reduce(
+      (total, item) => total + item.cantidad,
+      0
+    );
+  }
+  </script>
+  <style>
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #00010E;
+margin: 0;
+  padding: 0;
+  color: white;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0);
+  position: relative;
+    z-index: 2; 
+    border-top: 0.1px solid #ffffff5e;
+}
+
+header nav a {
+  color: #ffffff;
+  margin-left: 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Hero Section */
+.hero {
+  position: relative; /* Necesario para posicionar el pseudo-elemento */
+  background-image: url('/htmlgym/imagenes/inicio.jpeg');
+  background-size: cover;
+  background-position: auto;
+  padding: 100px 40px;
+  text-align: left;
+  overflow: hidden; /* Para asegurarte de que el pseudo-elemento no se desborde */
+}
+
+.hero::before {
+  content: ''; /* Necesario para que el pseudo-elemento se muestre */
+  position: absolute; /* Posicionarlo sobre el contenedor */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Color negro con 50% de opacidad */
+  z-index: 1; /* Asegúrate de que esté por encima de la imagen */
+}
+
+.hero h1, .hero p { /* Asegúrate de que el texto esté por encima del pseudo-elemento */
+  position: relative; /* Necesario para que el texto esté por encima del pseudo-elemento */
+  z-index: 2; /* Asegúrate de que el texto esté por encima */
+  color: #ffffff; /* Color blanco para el texto */
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.hero-content h1 span {
+  color: #ffffff;
+}
+
+.hero-content p {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+/* Botón */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #00043d;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #0f1041, #010036);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #0f1041, #010036); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+/* Color de fondo del botón */
+  color: #ffffff; /* Color del texto del botón */
+  font-weight: bold;
+  border-radius: 5px;
+  text-decoration: none;
+  position: relative; /* Necesario para que el texto esté por encima del pseudo-elemento */
+  z-index: 2;
+}
+
+/* Programas */
+.programas {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
+  padding: 20px;
+  border-radius: 8px;
+  width: 250px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.card img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.card h3 {
+  margin: 10px 0;
+  color: #ffffff; /* Color del texto del título */
+}
+
+/* Mercancía */
+.mercancia {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.productos {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+
+}
+
+.producto img {
+  width: 150px;
+  height: 150px;
+  border-radius: 8px;
+}
+
+.producto p {
+  margin-top: 10px;
+  color: #ffffff; /* Color del texto del producto */
+}
+
+/* Galería */
+.galeria {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.imagenes {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.imagenes img {
+  width: 150px;
+  height: 150px;
+  border-radius: 8px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: rgba(0, 0, 0, 0); 
+  border-top: 0.1px solid #ffffff5e;
+}
+
+footer p {
+  font-size: 0.9em;
+  color: #ffffff; /* Color del texto del footer */
+}
+
+/* Formulario oculto */
+#registro {
+  display: none;
+  text-align: center;
+  padding: 20px;
+  background-color: #333; /* Fondo del formulario */
+  border-radius: 8px;
+  margin: 20px auto;
+  width: 300px;
+}
+
+#registro input,
+#registro select {
+  margin: 10px 0;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+#registro button {
+  padding: 10px 20px;
+  background-color: #808080; /* Color del botón del formulario */
+  color: #111;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Menú */
+.menu {
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+  color: rgb(112, 112, 112);
+  padding: 10px;
+  text-align: right;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+/* Carrito */
+.carrito-icono {
+  position: relative;
+}
+
+.contador {
+  top: -10px;
+  right: -10px;
+  background-color: rgba(255, 0, 0, 0.7); /* Fondo del contador */
+  color: white;
+  border-radius: 50%;
+  padding: 5px 5px;
+  font-size: 14px;
+}
+
+.carrito-flotante {
+  position: fixed;
+  right: 0;
+  top: 100px;
+  width: 300px;
+  background-color: #fff; /* Fondo del carrito */
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  z-index: 1000;
+  display: block; /* Asegúrate de que esté visible */
+}
+
+.carrito-flotante h2 {
+  text-align: center;
+  padding: 10px;
+  background-color: #000; /* Fondo del título del carrito */
+  color: white;
+  margin: 0;
+  border-radius: 5px 5px 0 0;
+}
+
+.carrito-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  color: #000; /* Color del texto del item del carrito */
+}
+
+.total {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: right;
+  padding: 10px;
+}
+
+.empty {
+  text-align: center;
+  font-size: 18px;
+  color: gray;
+  padding: 20px;
+}
+
+  </style>
+</head>
+<body>
+  <!-- Header de navegación -->
+<header>
+  <h2>MUSCLEGYM</h2>
+  <nav>
+    <a href="/htmlgym/pages/inicio/dashboard.html">Inicio</a>
+    <a href="/htmlgym/pages/acerca_de/acerca.html">Acerca de</a>
+    <a href="/htmlgym/pages/programas/programas.php">Programas</a>
+    <a href="/htmlgym/pages/tienda/tienda.php">Tienda</a>
+    <a href="/htmlgym/pages/membrecia/membresia.html">Membresía</a>
+    <a href="/htmlgym/pages/perfil/perfil1.php">Perfil</a>
+    <a href="/htmlgym/pages/index/login.html">Acceso</a>
+  <a class="carrito-icono">
+    <a href="/htmlgym/pages/tienda/carrito.php" id="carritoMenu">
+      🛒 
+      <span id="contadorCarrito" class="contador">0</span>
+    </a>
+  </a>
+  <a href="/htmlgym/pages/entrenador/index.php">Chat con entrenador</a>
+  <a href="/htmlgym/pages/entrenador/chat.php">Entrenador</a>
+  <a href="/htmlgym/pages/tienda/formulario_agregar_producto.html">agregar producto</a>
+</nav>   
+</header>
+  
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Haz que tu <br><span>CUERPO ESTÉ EN FORMA</span></h1>
+      <p>
+        Tu bienestar está en tus manos. Explora los beneficios de nuestros programas diseñados para fortalecer tu cuerpo, mejorar tu rendimiento y transformar tu vida.
+      </p>
+      
+      <a href="/htmlgym/pages/index/registrarse.html" class="btn" onclick="mostrarFormulario('Ayuda para principiantes')">Empezar</a>
+    </div>
+  </header>
+
+  <!-- Programas -->
+<section class="programas">
+  <h2>Programas gratuitos</h2>
+  <div class="cards">
+    <div class="card">
+      <img src="/htmlgym/imagenes/Ayuda para principiantes.jpg" alt="Programa 1">
+      <h3>Ayuda para principiantes</h3>
+      <a href="/htmlgym/pages/inicio/registro_programas.html?programa=Ayuda%20para%20principiantes" class="btn">Comience hoy</a>
+    </div>
+    <div class="card">
+      <img src="/htmlgym/imagenes/Entrenamiento avanzado.jpg" alt="Programa 2">
+      <h3>Entrenamiento avanzado</h3>
+      <a href="/htmlgym/pages/inicio/registro_programas.html?programa=Entrenamiento%20avanzado" class="btn">Comience hoy</a>
+    </div>
+    <div class="card">
+      <img src="/htmlgym/imagenes/Perdida de peso.jpg" alt="Programa 3">
+      <h3>Perdida de peso</h3>
+      <a href="/htmlgym/pages/inicio/registro_programas.html?programa=Perdida%20de%20peso" class="btn">Comience hoy</a>
+    </div>
+    <div class="card">
+      <img src="/htmlgym/imagenes/Sin equipo.jpg" alt="Programa 4">
+      <h3>Sin equipo</h3>
+      <a href="/htmlgym/pages/inicio/registro_programas.html?programa=Sin%20equipo" class="btn">Comience hoy</a>
+    </div>
+    <div class="card">
+      <img src="/htmlgym/imagenes/Entrenamiento de fuerza.jpg" alt="Programa 5">
+      <h3>Entrenamiento de fuerza</h3>
+      <a href="/htmlgym/pages/inicio/registro_programas.html?programa=Entrenamiento%20de%20fuerza" class="btn">Comience hoy</a>
+    </div>
+  </div>
+</section>
+
+  <!-- Mercancía -->
+  <section class="mercancia">
+    <h2>Consigue nuestra mercancía</h2>
+    <div class="productos">
+      <div class="producto">
+        <img src="/htmlgym/imagenes/barra.jpg" alt="Barra">
+        <p>Barra</p>
+      </div>
+      <div class="producto">
+        <img src="/htmlgym/imagenes/bicicleta_estatica.jpg" alt="Bicicleta estática">
+        <p>Bicicleta estática</p>
+      </div>
+      <div class="producto">
+        <img src="/htmlgym/imagenes/mancuernas.jpg" alt="Mancuernas">
+        <p>Mancuernas</p>
+      </div>
+      <div class="producto">
+        <img src="/htmlgym/imagenes/discos.jpg" alt="Discos">
+        <p>Discos</p>
+      </div>
+    </div>
+    <a href="/pages/tienda/tienda.html" class="btn">Ver toda la mercancía</a>
+  </section>
+
+  <!-- Galería -->
+  <section class="galeria">
+    <h2>Galería</h2>
+    <div class="imagenes">
+      <img src="/htmlgym/imagenes/galeria1.jpg" alt="Imagen 1">
+      <img src="/htmlgym/imagenes/galeria2.jpg" alt="Imagen 2">
+      <img src="/htmlgym/imagenes/galeria3.jpg" alt="Imagen 3">
+      <img src="/htmlgym/imagenes/galeria4.jpg" alt="Imagen 4">
+      <img src="/htmlgym/imagenes/galeria5.jpg" alt="Imagen 5">
+      <img src="/htmlgym/imagenes/galeria6.jpg" alt="Imagen 6">
+    </div>
+  </section>
+  <script>
+
+        // Cargar carrito desde localStorage al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+      actualizarContadorCarrito();
+        })
+  </script>
+  <!-- Footer -->
+  <footer>
+    <p>© 2024 MUSCLEGYM. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>

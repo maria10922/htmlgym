@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+    <style>
+      .contador {
+  top: -10px;
+  right: -10px;
+  background-color: rgba(255, 0, 0, 0.7); /* Fondo del contador */
+  color: white;
+  border-radius: 50%;
+  padding: 5px 5px;
+  font-size: 14px;
+}
+/* Footer */
+footer {
+  text-align: center;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: rgba(0, 0, 0, 0); 
+  border-top: 0.1px solid #ffffff5e;
+}
+
+footer p {
+  font-size: 0.9em;
+  color: #ffffff; /* Color del texto del footer */
+}
+        body {
+  font-family: 'Arial', sans-serif;
+  background-color: #00010E;
+margin: 0;
+  padding: 0;
+  color: white;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0);
+  position: relative;
+    z-index: 2; 
+    border-bottom: 0.1px solid #ffffff5e;
+}
+
+header nav a {
+  color: #ffffff;
+  margin-left: 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+}
+        .carrito {
+    width: 280px;
+    background-color: #11111100;
+    padding: 47px;
+    position: fixed;  /* Esto hace que el div se quede fijo */
+    top: 89px;        /* Ajusta esta distancia según la altura de tu header */
+    right: 20px;      /* Ajusta la distancia desde el borde derecho */
+    margin-bottom: 500px;
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.22);
+}
+
+
+
+        .contenedor {
+    display: flex; /* Activa Flexbox */
+    gap: 20px; /* Espaciado entre las secciones */
+  }
+  .section, .banco {
+    flex: 1; /* Hace que ambas secciones ocupen el mismo espacio */
+    padding: 30px;
+    background-color: #0e0e0e00;
+    color: white;
+    border-radius: 0px;
+  }
+
+  .forma{
+    flex: 1;
+    padding: 20px;
+    background-color: #25252500;
+    color: white;
+    border-radius: 10px;
+    margin-left: 80px;
+    margin-right: 100px;
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.22);
+  }
+        .producto {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .producto-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .producto-info {
+            margin-left: 15px;
+        }
+        .producto-info h3 {
+            font-size: 18px;
+            margin: 0;
+        }
+        .precio {
+            color: #00bfae;
+            font-size: 16px;
+        }
+        .descripcion {
+            font-size: 14px;
+            color: #bbb;
+        }
+        .cantidad {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .action-btn{
+            background-color: #07004b;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .subtotal {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .subtotal span {
+            color: #00bfae;
+        }
+        .btn-pagar {
+            background-color: #10003b;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .btn-pagar:hover {
+            background-color: #18003f;
+        }
+        .radio-label img {
+    width: 30px; /* Ajusta el ancho según sea necesario */
+    height: auto; /* Mantiene la proporción de la imagen */
+    margin-left: 10px; /* Espacio entre el texto y la imagen */
+  }
+img{
+    width: 40px; /* Ajusta el ancho según sea necesario */
+    height: auto; /* Mantiene la proporción de la imagen */
+    margin-left: 15px; /* Espacio entre el texto y la imagen */
+}
+h3{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; /* Espaciado entre cada opción */
+}
+  .radio-label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px; /* Espaciado entre cada opción */
+  }
+  h4{
+    margin-left: 80px;
+    margin-right: 100px;
+    font-size: 23px;
+  }
+    </style>
+</head>
+<body>
+<!-- Header de navegación -->
+<header>
+  <h2>MUSCLEGYM</h2>
+  <nav>
+    <a href="/htmlgym/pages/inicio/dashboard.html">Inicio</a>
+    <a href="/htmlgym/pages/acerca_de/acerca.html">Acerca de</a>
+    <a href="/htmlgym/pages/programas/programas.php">Programas</a>
+    <a href="/htmlgym/pages/tienda/tienda.html">Tienda</a>
+    <a href="/htmlgym/pages/membrecia/membresia.html">Membresía</a>
+    <a href="/htmlgym/pages/perfil/perfil1.php">Perfil</a>
+    <a href="/htmlgym/pages/index/login.html">Acceso</a>
+  <a class="carrito-icono">
+    <a href="/htmlgym/pages/tienda/carrito.html" id="carritoMenu">
+      🛒 
+      <span id="contadorCarrito" class="contador">0</span>
+    </a>
+  </a>
+  <a href="/htmlgym/pages/entrenador/index.php">Chat con entrenador</a>
+  <a href="/htmlgym/pages/entrenador/chat.php">Entrenador</a>
+</nav>   
+</header>
+  <div class="contenedor">
+    <section class="banco">
+        <div class="select">
+            <h4>Selecciona el banco</h4>
+            <section class="forma">
+                <div>
+                <h3 class="img">
+                      <img src="pse.png" alt=" Transferencia con PSE"> Transferencia con PSE
+                </h3>
+                </div>
+                  <form>
+                    
+                  
+                    <label class="radio-label">
+                      <input type="radio" name="banco" value="av-villas"> 
+                      <img src="pse.png" alt="AV Villas"> AV Villas
+                    </label>
+                  
+                    <label class="radio-label">
+                      <input type="radio" name="banco" value="bbva">
+                      <img src="pse.png" alt="BBVA"> BBVA
+                    </label>
+                  
+                    <label class="radio-label">
+                      <input type="radio" name="banco" value="ban100">
+                      <img src="pse.png" alt="Ban100"> Ban100
+                    </label>
+                  
+                    <label class="radio-label">
+                      <input type="radio" name="banco" value="agrario">
+                      <img src="pse.png" alt="Banco Agrario de Colombia"> Banco Agrario de Colombia
+                    </label>
+                  
+                    <label class="radio-label">
+                      <input type="radio" name="banco" value="caja-social">
+                      <img src="pse.png" alt="Banco Caja Social"> Banco Caja Social
+                    </label>
+                  
+                    <label class="radio-label">
+                      <input type="radio" name="banco" value="falabella">
+                      <img src="pse.png" alt="Banco Falabella"> Banco Falabella
+                    </label>
+                  
+                    <label class="radio-label">
+                      <input type="radio" name="banco" value="gnb-sudameris">
+                      <img src="pse.png" alt="Banco GNB Sudameris"> Banco GNB Sudameris
+                    </label>
+                  
+                    <label class="radio-label">
+                      <input type="radio" name="banco" value="itau">
+                      <img src="pse.png" alt="Banco Itaú"> Banco Itaú
+                    </label>
+                  
+                    <label class="radio-label">
+                      <input type="radio" name="banco" value="pichincha">
+                      <img src="pse.png" alt="Banco Pichincha"> Banco Pichincha
+                    </label>
+                  
+                    <label class="radio-label">
+                      <input type="radio" name="banco" value="popular">
+                      <img src="pse.png" alt="Banco Popular"> Banco Popular
+                    </label>
+                  
+                    <label class="radio-label">
+                      <input type="radio" name="banco" value="serfinanza">
+                      <img src="pse.png" alt="Banco Serfinanza"> Banco Serfinanza
+                    </label>
+                  
+                    <label class="radio-label">
+                      <input type="radio" name="banco" value="union">
+                      <img src="pse.png" alt="Banco Unión"> Banco Unión
+                    </label>
+                  
+                    <label class="radio-label">
+                      <input type="radio" name="banco" value="bogota">
+                      <img src="pse.png" alt="Banco de Bogotá"> Banco de Bogotá
+                    </label>
+                  
+                    <label class="radio-label">
+                      <input type="radio" name="banco" value="occidente">
+                      <img src="pse.png" alt="Banco de Occidente"> Banco de Occidente
+                    </label>
+                  
+                    <label class="radio-label">
+                      <input type="radio" name="banco" value="bancolombia">
+                      <img src="pse.png" alt="Bancolombia"> Bancolombia
+                    </label>
+                  
+                    <label class="radio-label">
+                      <input type="radio" name="banco" value="citibank">
+                      <img src="pse.png" alt="Citibank"> Citibank
+                    </label>
+                  
+                    <label class="radio-label">
+                      <input type="radio" name="banco" value="coltefinanciera">
+                      <img src="pse.png" alt="Coltefinanciera"> Coltefinanciera
+                    </label>
+                  
+                    <label class="radio-label">
+                      <input type="radio" name="banco" value="confiar">
+                      <img src="pse.png" alt="Confiar Cooperativa Financiera"> Confiar Cooperativa Financiera
+                    </label>
+                  
+                    <label class="radio-label">
+                      <input type="radio" name="banco" value="davivienda">
+                      <img src="pse.png" alt="Davivienda"> Davivienda
+                    </label>
+                  
+                    <label class="radio-label">
+                      <input type="radio" name="banco" value="santander">
+                      <img src="pse.png" alt="Santander"> Santander
+                    </label>
+                  
+                    <label class="radio-label">
+                      <input type="radio" name="banco" value="scotiabank">
+                      <img src="pse.png" alt="Scotiabank Colpatria"> Scotiabank Colpatria
+                    </label>
+                  </form>
+                  
+                  <button type="button" class="btn-pagar" id="confirmarBanco">Continuar</button>
+
+                  
+            </section>
+        </div>
+        </section>
+<section class="section">
+  <div class="carrito">
+    <h2>Productos de la compra</h2>
+    <div id="productosCompra"></div>
+
+    <div>
+        <h2>Resumen de la compra</h2>
+    </div>
+    <div id="cantidadproductos">
+      <!-- Este contenido se actualizará dinámicamente -->
+    </div>
+    <div id="total" class="total">
+      Pagas: $0.00
+    </div>
+  </div>
+</section>
+
+</div>
+  <!-- Footer -->
+  <footer>
+    <p>© 2024 MUSCLEGYM. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    document.getElementById('confirmarBanco').addEventListener('click', function() {
+    // Obtener el banco seleccionado
+    const bancoSeleccionado = document.querySelector('input[name="banco"]:checked');
+    
+    if (bancoSeleccionado) {
+      // Redirigir a confirmar_compra.html con el banco seleccionado como parámetro
+      const banco = bancoSeleccionado.value;
+      window.location.href = `confirmar_compra.php?banco=${encodeURIComponent(banco)}`;
+    } else {
+      alert('Por favor selecciona un banco antes de continuar.');
+    }
+  });
+    // Cargar los productos del carrito desde el localStorage
+    document.addEventListener('DOMContentLoaded', () => {
+        const carrito = JSON.parse(localStorage.getItem('carritoCompra')) || [];
+
+        const productosCompraDiv = document.getElementById('productosCompra');
+        const cantidadProductos = document.getElementById('cantidadproductos');
+        const totalDiv = document.getElementById('total');
+        const contadorCarrito = document.getElementById('contadorCarrito');
+
+        let totalCompra = 0;
+        let cantidadTotal = 0;
+
+        if (carrito.length > 0) {
+            carrito.forEach(producto => {
+                productosCompraDiv.innerHTML += `
+                    <div class="producto">
+                        <img src="${producto.imagen}" alt="${producto.nombre}" class="producto-img">
+                        <div class="producto-info">
+                            <h3>${producto.nombre}</h3>
+                            <p class="precio">$${(producto.precio * producto.cantidad).toFixed(2)}</p>
+                            <p class="descripcion">Cantidad: ${producto.cantidad}</p>
+                        </div>
+                    </div>
+                `;
+                totalCompra += producto.precio * producto.cantidad;
+                cantidadTotal += producto.cantidad;
+            });
+            cantidadProductos.innerHTML = `Cantidad de productos (${cantidadTotal}): $${totalCompra.toFixed(2)}`;
+            totalDiv.innerHTML = `Pagas: $${totalCompra.toFixed(2)}`;
+            contadorCarrito.textContent = carrito.length; // Actualiza el contador de productos
+        } else {
+            productosCompraDiv.innerHTML = '<p>No hay productos en la compra.</p>';
+            cantidadProductos.innerHTML = 'Cantidad de productos (0): $0.00';
+            totalDiv.innerHTML = 'Pagas: $0.00';
+            contadorCarrito.textContent = '0';
+        }
+    });
+  </script>
+</body>
+</html>
